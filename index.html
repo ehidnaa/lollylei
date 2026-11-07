@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Enter the mysterious violet world of Lollylei — fashion, beauty and self-expression.">
+  <title>Lollylei — Enter My Violet World</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --night: #070510;
+      --violet-deep: #120922;
+      --violet: #7c3aed;
+      --orchid: #c084fc;
+      --lilac: #e9d5ff;
+      --silver: #f4effa;
+      --muted: rgba(238, 226, 250, .68);
+      --line: rgba(221, 189, 255, .22);
+      --serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--night);
+      color: var(--silver);
+      font-family: var(--sans);
+    }
+
+    .page {
+      min-height: 100svh;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      padding: clamp(24px, 5vw, 72px) 20px;
+      background:
+        radial-gradient(circle at 18% 10%, rgba(124, 58, 237, .23), transparent 34%),
+        radial-gradient(circle at 84% 74%, rgba(192, 132, 252, .16), transparent 35%),
+        linear-gradient(145deg, #05030a 0%, #10071c 55%, #080510 100%);
+    }
+
+    .page::before {
+      content: "";
+      position: fixed;
+      inset: -30%;
+      z-index: -3;
+      background: conic-gradient(from 90deg at 50% 50%, transparent, rgba(92, 45, 145, .12), transparent 35%, rgba(124, 58, 237, .13), transparent 72%);
+      filter: blur(60px);
+      animation: aura 24s linear infinite;
+    }
+
+    .mist {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: .55;
+      background:
+        radial-gradient(ellipse at 50% 96%, rgba(120, 62, 170, .2), transparent 45%),
+        repeating-radial-gradient(ellipse at 50% 120%, transparent 0 38px, rgba(220, 185, 255, .035) 39px 40px);
+      mask-image: linear-gradient(to top, black, transparent 68%);
+    }
+
+    .stars, .stars::before, .stars::after {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      content: "";
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.9) 0 1px, transparent 1.4px),
+        radial-gradient(circle, rgba(201,160,255,.8) 0 1px, transparent 1.5px);
+      background-size: 97px 109px, 151px 127px;
+      background-position: 17px 31px, 64px 3px;
+      opacity: .35;
+    }
+
+    .stars::before { transform: scale(.72) rotate(17deg); opacity: .25; }
+    .stars::after { transform: scale(1.25) rotate(-9deg); opacity: .18; }
+
+    .shell {
+      width: min(100%, 980px);
+      display: grid;
+      gap: clamp(26px, 4vw, 46px);
+      justify-items: center;
+      text-align: center;
+    }
+
+    .sigil {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--lilac);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .48em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: reveal .9s .1s forwards;
+    }
+
+    .sigil::before, .sigil::after {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--orchid));
+    }
+
+    .sigil::after { transform: rotate(180deg); }
+
+    .portrait {
+      width: min(100%, 650px);
+      aspect-ratio: 16 / 10;
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px 32px 120px 120px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 50% 28%, rgba(225,196,255,.22) 0 4%, transparent 24%),
+        radial-gradient(ellipse at 50% 87%, #32124f 0 13%, #1c0b2d 38%, #0d0715 75%);
+      box-shadow:
+        0 50px 100px -45px #000,
+        0 0 0 1px rgba(255,255,255,.03) inset,
+        0 0 65px rgba(124,58,237,.18);
+      opacity: 0;
+      animation: reveal 1s .2s forwards, levitate 7s 1.2s ease-in-out infinite;
+    }
+
+    .portrait::before {
+      content: "";
+      display: none;
+    }
+
+    .portrait::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(to top, rgba(12, 4, 20, .34), transparent 44%),
+        radial-gradient(circle at 50% 50%, transparent 48%, rgba(12, 4, 20, .28) 100%);
+      pointer-events: none;
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: 50% 42%;
+      filter: saturate(.9) contrast(1.03) brightness(.88);
+    }
+
+    .portrait-mark {
+      position: absolute;
+      left: 50%;
+      bottom: 9%;
+      width: 22px;
+      height: 22px;
+      transform: translateX(-50%) rotate(45deg);
+      border: 1px solid var(--orchid);
+      box-shadow: 0 0 18px var(--violet);
+      z-index: 3;
+    }
+
+    .copy { max-width: 780px; }
+
+    .intro {
+      max-width: 62ch;
+      margin: 0 auto 22px;
+      color: var(--muted);
+      font-size: clamp(14px, 1.6vw, 17px);
+      line-height: 1.8;
+      opacity: 0;
+      animation: reveal .9s .38s forwards;
+    }
+
+    .intro strong { color: var(--silver); font-weight: 550; }
+
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(40px, 7vw, 76px);
+      font-weight: 400;
+      line-height: .99;
+      letter-spacing: -.045em;
+      text-wrap: balance;
+      opacity: 0;
+      animation: reveal 1s .5s forwards;
+    }
+
+    h1 .violet {
+      color: transparent;
+      background: linear-gradient(110deg, #fff 8%, #dcc3ff 42%, #9f67e8 62%, #fff 92%);
+      background-size: 220% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: shimmer 8s ease-in-out infinite;
+      filter: drop-shadow(0 0 22px rgba(159, 103, 232, .25));
+    }
+
+    .sub {
+      max-width: 52ch;
+      margin: 24px auto 0;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: clamp(17px, 2.2vw, 22px);
+      font-style: italic;
+      line-height: 1.55;
+      opacity: 0;
+      animation: reveal .9s .64s forwards;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      opacity: 0;
+      animation: reveal .9s .8s forwards;
+    }
+
+    .button {
+      min-width: 210px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 25px;
+      border-radius: 999px;
+      border: 1px solid rgba(219, 186, 255, .3);
+      text-decoration: none;
+      color: var(--silver);
+      font-size: 14px;
+      font-weight: 650;
+      letter-spacing: .04em;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .button.primary {
+      color: #120719;
+      background: linear-gradient(135deg, #f0dcff, #bc80f5 52%, #7c3aed);
+      box-shadow: 0 16px 45px -18px rgba(181, 106, 255, .85);
+    }
+
+    .button.secondary { background: rgba(255,255,255,.035); backdrop-filter: blur(12px); }
+    .button[aria-disabled="true"] {
+      cursor: default;
+      opacity: .5;
+      pointer-events: none;
+    }
+    .button:hover { transform: translateY(-3px); border-color: rgba(225, 196, 255, .72); box-shadow: 0 20px 50px -20px rgba(181, 106, 255, .9); }
+    .button:focus-visible { outline: 2px solid var(--lilac); outline-offset: 4px; }
+
+    .whisper {
+      color: rgba(222, 197, 245, .52);
+      font-size: 10px;
+      letter-spacing: .34em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: reveal .9s .95s forwards;
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes levitate {
+      0%, 100% { transform: translateY(-5px); }
+      50% { transform: translateY(7px); }
+    }
+
+    @keyframes aura { to { transform: rotate(360deg); } }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 120% 0; }
+      50% { background-position: -20% 0; }
+    }
+
+    @media (max-width: 560px) {
+      .page { padding-inline: 16px; }
+      .portrait { border-radius: 24px 24px 72px 72px; }
+      .sigil { letter-spacing: .32em; }
+      .sigil::before, .sigil::after { width: 18px; }
+      .actions { width: 100%; }
+      .button { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; }
+      .sigil, .portrait, .intro, h1, .sub, .actions, .whisper { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="mist" aria-hidden="true"></div>
+    <div class="stars" aria-hidden="true"></div>
+
+    <section class="shell" aria-labelledby="title">
+      <div class="sigil">Lollylei</div>
+
+      <figure class="portrait" aria-label="Portrait of Lollylei">
+        <img src="lollylei.png" alt="Lollylei">
+        <span class="portrait-mark" aria-hidden="true"></span>
+      </figure>
+
+      <div class="copy">
+        <p class="intro">
+          Hi, my name is <strong>Lollylei</strong>. I’m 23, a trans woman with a deep love for fashion,
+          beauty and self-expression. For me, every look is a new mood — bold, playful and always evolving.
+        </p>
+
+        <h1 id="title">Step into Lollylei’s <span class="violet">violet world</span></h1>
+
+        <p class="sub">
+          Come closer. Let’s talk about style, dreams and everything that makes us feel beautifully alive.
+          There is always another side of me waiting to be discovered.
+        </p>
+      </div>
+
+      <nav class="actions" aria-label="Main links">
+        <a class="button primary" href="https://t.me/+XL2XzX6eZng5MzM0" target="_blank" rel="noopener" aria-label="Open Lollylei's Telegram">✦ Enter Lollylei’s world</a>
+        <span class="button secondary" aria-disabled="true">Discover more — soon</span>
+      </nav>
+
+      <div class="whisper">Every message is read personally</div>
+    </section>
+  </main>
+</body>
+</html>
